@@ -1,0 +1,61 @@
+﻿@model LibraryManagementSystem.Models.Book
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h3 class="mb-0">@Model.Title</h3>
+        <div class="text-muted">by @Model.Author</div>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Books">
+        <i class="bi bi-arrow-left me-1"></i> Back
+    </a>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">Book Information</div>
+            <div class="card-body">
+                <dl class="row mb-0">
+                    <dt class="col-sm-3">Title</dt>
+                    <dd class="col-sm-9">@Model.Title</dd>
+
+                    <dt class="col-sm-3">Author</dt>
+                    <dd class="col-sm-9">@Model.Author</dd>
+
+                    <dt class="col-sm-3">Category</dt>
+                    <dd class="col-sm-9">@Model.Category?.Name</dd>
+
+                    <dt class="col-sm-3">Available</dt>
+                    <dd class="col-sm-9">@Model.AvailableCopies</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="kpi">
+            <div>
+                <p class="l">Status</p>
+                @if (Model.AvailableCopies > 0)
+                {
+                    <p class="n text-success">Available</p>
+                }
+                else
+                {
+                    <p class="n text-danger">Out</p>
+                }
+            </div>
+            <div class="ic"><i class="bi bi-book-half"></i></div>
+        </div>
+
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="text-muted mb-2">Tip</div>
+                <div class="fw-semibold">Admins can issue this book from Loans → Issue Book.</div>
+            </div>
+        </div>
+    </div>
+</div>

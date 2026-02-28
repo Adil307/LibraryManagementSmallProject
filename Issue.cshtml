@@ -1,0 +1,47 @@
+﻿@{
+    var books = ViewBag.Books as List<LibraryManagementSystem.Models.Book>;
+    var members = ViewBag.Members as List<LibraryManagementSystem.Models.Member>;
+}
+
+<h2>Issue Book</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-action="Issue" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label class="form-label">Book</label>
+        <select name="bookId" class="form-select" required>
+            @foreach (var b in books!)
+            {
+                <option value="@b.Id">@b.Title (@b.AvailableCopies available)</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Member</label>
+        <select name="memberId" class="form-select" required>
+            @foreach (var m in members!)
+            {
+                <option value="@m.Id">@m.FullName</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Due Date</label>
+        <input type="date"
+               name="dueDate"
+               class="form-control"
+               required
+               value="@DateTime.Today.AddDays(7).ToString("yyyy-MM-dd")" />
+    </div>
+
+    <button class="btn btn-success">Issue</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>

@@ -1,0 +1,63 @@
+﻿@model LibraryManagementSystem.Models.Book
+
+@{
+    ViewData["Title"] = "Edit Book";
+}
+
+<h2 class="mb-3">Edit Book</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Author</label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">ISBN</label>
+        <input asp-for="ISBN" class="form-control" />
+        <span asp-validation-for="ISBN" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Total Copies</label>
+        <input asp-for="TotalCopies" class="form-control" />
+        <span asp-validation-for="TotalCopies" class="text-danger"></span>
+    </div>
+
+    <!-- ✅ Show current image -->
+    <div class="mb-3">
+        <label class="form-label">Current Image</label><br />
+        @if (!string.IsNullOrWhiteSpace(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="@Model.Title"
+                 style="width:120px;height:160px;object-fit:cover;border-radius:8px;border:1px solid #ddd;" />
+        }
+        else
+        {
+            <div class="text-muted">No image uploaded.</div>
+        }
+    </div>
+
+    <!-- ✅ Upload new image -->
+    <div class="mb-3">
+        <label class="form-label">Change Image</label>
+        <input type="file" name="imageFile" class="form-control" accept="image/*" />
+        <div class="form-text">If you upload a new image, it will replace the old one.</div>
+    </div>
+
+    <button class="btn btn-primary">Update</button>
+    <a asp-action="Index" class="btn btn-outline-secondary ms-2">Back</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

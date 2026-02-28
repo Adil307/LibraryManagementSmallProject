@@ -1,0 +1,28 @@
+﻿@model List<LibraryManagementSystem.Models.Member>
+
+<h2>Members</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add Member</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.FullName</td>
+                <td>@m.Phone</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@m.Id"
+                       class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
